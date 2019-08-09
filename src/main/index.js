@@ -18,9 +18,17 @@ function createWindow () {
    * Initial window options
    */
   mainWindow = new BrowserWindow({
-    height: 563,
+    height: 463,
     useContentSize: true,
-    width: 1000
+    width: 360,
+		transparent: true,
+		// 边框隐藏
+    frame: false,
+    // 隐藏MAC标题
+    titleBarStyle: 'hidden',
+    // 固定宽高
+    resizable: false,
+		maximizable: false
   })
 
   mainWindow.loadURL(winURL)
