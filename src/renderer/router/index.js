@@ -6,13 +6,23 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'main-window',
-      component: require('@/pages/MainWindow/MainWindow').default
-    },
-    {
       path: '*',
       redirect: '/'
-    }
+    },
+	{
+	  path: '/',
+	  name: 'main-window',
+	  component: () => import('@/pages/MainWindow/MainWindow.vue'),
+	  children: [
+		  {
+		    path: '',
+		    component: () => import('@/pages/MainWindow/pages/Index.vue')
+		  },
+		  {
+		    path: '/setting',
+		    component: () => import('@/pages/MainWindow/pages/Setting.vue')
+		  }
+	  ]
+	}
   ]
 })

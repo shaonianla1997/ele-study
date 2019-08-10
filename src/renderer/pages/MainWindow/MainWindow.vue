@@ -1,48 +1,73 @@
 <template>
-  <div id="wrapper">
-    <main-header/>
-  </div>
+	<div id="wrapper">
+		<Frame>
+			<main-header v-on:setting="goSetting" slot="header" />
+		</Frame>
+	</div>
 </template>
 
 <script>
-  import MainHeader from "@/components/header/MainHeader.vue";
-  export default {
-    name: 'main-window',
-	components:{MainHeader},
-    methods: {
-      open (link) {
-        this.$electron.shell.openExternal(link)
-      }
-    }
-  }
+	import Frame from "@/components/Frame/Frame.vue"
+	import MainHeader from "@/components/header/MainHeader.vue";
+	export default {
+		name: 'main-window',
+		data() {
+			return {
+				setting: false
+			}
+		},
+		components: {
+			Frame,
+			MainHeader
+		},
+		methods: {
+			open(link) {
+				this.$electron.shell.openExternal(link)
+			},
+			goSetting(e) {
+				if(this.setting){
+					this.$store.dispatch('changeTransition', 'flip')
+					this.$router.push('/')
+					this.setting=false
+				}else{
+					this.$store.dispatch('changeTransition', 'flip')
+					this.$router.push('/setting')
+					this.setting=true
+				}
+				
+			},
+			closeWindow () {
+			  remote.app.quit()
+			}
+		}
+	}
 </script>
 
 <style>
-  @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+	@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
 
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0
-  }
+	* {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+	}
 
-  body { font-family: 'Source Sans Pro', sans-serif; }
+	body {
+		font-family: 'Source Sans Pro', sans-serif;
+	}
 
-  #wrapper {
-    background:
-      radial-gradient(
-        ellipse at top left,
-        rgba(255, 255, 255, 1) 40%,
-        rgba(229, 229, 229, .9) 100%
-      );
-    height: 99vh;
-    width: 99vw;
-	border-radius: 6px;
-	margin: 1px;
-	-moz-box-shadow:2px 1px 8px #A2A2A2; -webkit-box-shadow:2px 1px 8px #A2A2A2; box-shadow:2px 1px 8px #A2A2A2;
-  }
+	#wrapper {
+		height: 99vh;
+		width: 99vw;
+		border-radius: 6px;
+		margin: 1px;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
 
-  /* #logo {
+	/* #logo {
     height: auto;
     margin-bottom: 20px;
     width: 420px;
