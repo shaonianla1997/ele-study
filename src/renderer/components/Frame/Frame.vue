@@ -1,6 +1,6 @@
 <template>
 	<div class="fullWindow" :style="fontColor">
-		<div class="backgroundclass" style="transition: all 0.5s" :style="backGroundParent">
+		<div class="backgroundclass" style="transition: all 0.5s"><!-- :style="backGroundParent" 此处是换肤 暂不设置 -->
 			<div class="backBodyClass" style="transition: all 0.5s" :style="backGroundChild"></div>
 		</div>
 		<header class="headDiv">
@@ -44,6 +44,7 @@
 		flex-direction: column;
 		justify-content: space-between;
 		position: relative;
+		background: rgba(221,205,65,0);
 	}
 
 	.bodyDiv {

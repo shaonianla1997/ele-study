@@ -34,7 +34,7 @@
 							<span>自动登录</span>
 						</div>
 					</div>
-					<div class="login-btn">登录</div>
+					<div class="login-btn" @click="openMainMenu">登录</div>
 				</div>
 			</div>
 		</div>
@@ -48,6 +48,27 @@
 				checked: true
 			}
 		},
+		methods: {
+			 openMainMenu() {
+				this.$store.dispatch('changeTransition', 'none')
+				let win = this.$Win.createWin({
+					width: 800,
+					height: 600,
+					vibrancy: true,
+					windowConfig: {
+						router: '/mainMenu',
+						name: 'mainMenu', // 窗口名字，如果该name窗口存在会直接显示，不会重新创建    
+						animation: 'fromRight',
+						data: {
+							index: 1
+						}
+					}
+				})
+				win.show()
+				this.$Win.closeWin()
+				//console.log(res)
+			}
+		},
 	}
 </script>
 
@@ -59,9 +80,9 @@
 		width: 100%;
 		height: 100%;
 		background: #EBF2F9;
-		-moz-box-shadow: 0px 0px 16px #808080;
-		-webkit-box-shadow: 0px 0px 16px #808080;
-		box-shadow: 0px 0px 16px #808080;
+		-moz-box-shadow: 0px 0px 5px #808080;
+		-webkit-box-shadow: 0px 0px 5px #808080;
+		box-shadow: 0px 0px 5px #808080;
 	}
 
 	.login-bg {
@@ -112,6 +133,7 @@
 		flex-direction: column;
 		margin-left: 12px;
 		-webkit-app-region: no-drag;
+		cursor: pointer
 	}
 
 	.login-count-inout {
@@ -174,6 +196,7 @@
 		border-radius: 4px;
 		color: #fff;
 		font-size: 12px;
-		letter-spacing: 10px
+		letter-spacing: 10px;
+		-webkit-app-region: no-drag;
 	}
 </style>
