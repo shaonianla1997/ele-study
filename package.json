@@ -21,7 +21,7 @@
     "postinstall": ""
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "electron-settings": "^3.2.0",
     "electron-vue-windows": "^1.0.39",
     "element-ui": "^2.11.1",
